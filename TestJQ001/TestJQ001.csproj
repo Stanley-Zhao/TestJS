@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Fake_MakeBuild.aspx" />
     <Content Include="GetMessage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -68,6 +69,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fake_MakeBuild.aspx.cs">
+      <DependentUpon>Fake_MakeBuild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fake_MakeBuild.aspx.designer.cs">
+      <DependentUpon>Fake_MakeBuild.aspx</DependentUpon>
     </Compile>
     <Compile Include="GetMessage.aspx.cs">
       <DependentUpon>GetMessage.aspx</DependentUpon>

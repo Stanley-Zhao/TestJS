@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace TestJQ001
 {
-    public partial class GetMessage : System.Web.UI.Page
+    public partial class Fake_MakeBuild : System.Web.UI.Page
     {
+        private string rootPath = "~/.";
+        private string 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write(DateTime.Now.ToString("yyyy-mm-dd HH:MM:ss"));
+            Response.Write(Server.MapPath("~/."));
         }
     }
 }
