@@ -9,40 +9,39 @@ using System.Web.UI.WebControls;
 
 namespace TestJQ001
 {
+    /// <summary>
+    /// This page is used to read temp.txt
+    /// </summary>
     public partial class GetMessage : System.Web.UI.Page
-    {
-        private string rootPath = "~/.";
-        private string fileName = "temp.txt";
-        const int SECOND = 1000;
-        string file = string.Empty;
-        private static string loading = string.Empty;
-
-        private static string temp = string.Empty;
-
+    {   
         public GetMessage()
         {
-            file = Path.Combine(Server.MapPath(rootPath), fileName);
+            Common.File = Path.Combine(Server.MapPath(Common.RootPath), Common.FileName);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             string tmp = string.Empty;
-            using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Write))
+            // when page is called, open temp.txt file as "FileShare.Write" mode
+            using (FileStream fs = File.Open(Common.File, FileMode.Open, FileAccess.Read, FileShare.Write))
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
-                    tmp = sr.ReadToEnd();
+                    tmp = sr.ReadToEnd(); // read to file's end
 
-                    if (tmp.CompareTo(temp) != 0)
+                    // see if anything new is written in temp.txt
+                    if (tmp.CompareTo(Common.Temp) != 0)
                     {
+                        // get new information, send it back to frontend with out any "..."
                         Response.Write(tmp);
-                        temp=tmp;
-                        loading = string.Empty;
+                        Common.Temp = tmp;
+                        Common.Loading = string.Empty;
                     }
                     else
                     {
-                        loading+=".";
-                        Response.Write(temp+loading);
+                        // nothing new, add more "..." in the end of current status
+                        Common.Loading+= ".";
+                        Response.Write(Common.Temp + Common.Loading);
                     }
                 }
             }
